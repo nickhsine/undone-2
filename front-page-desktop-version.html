@@ -1,0 +1,566 @@
+<html>
+
+<head>
+
+    <meta charset='utf-8'>
+    <title>Metadata Block</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+
+    <!-- 載入思源黑體 -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+        /* loing動畫 */
+        #loader {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            background-color: white;
+            opacity: 100%;
+            transition-property: all;
+            transition-duration: 1s;
+            display: flex;
+        }
+
+        #loader img {
+            width: 60%;
+            object-fit: cover;
+        }
+
+        #loader.loaded {
+            opacity: 0%;
+        }
+
+        /* 網站字體 */
+        body {
+            font-family: 'Roboto', 'Noto Sans TC', sans-serif;
+            margin: 0;
+            background-color: #FBEEEA;
+        }
+
+
+        /* 網站排版置中 */
+        .block-horizontal-center {
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        /* 首頁各區域block：尺寸、背景色等等 */
+
+        .header-block {
+            width: 100%;
+            height: 80px;
+            background-color: white;
+            /*margin-bottom:-80px;*/
+            /*display: inline;*/
+            position: fixed;
+            left: 0;
+            z-index: 1;
+
+        }
+
+        .header {
+            width: 1440px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+
+        .featured-block {
+            width: 1440px;
+            height: 1024px;
+            /*margin-top: -80px;*/
+            position: relative;
+
+        }
+
+        .recommended-block {
+            width: 1440px;
+            height: auto;
+            background-color: #FBEEEA;
+
+        }
+
+        .your-voice-block {
+            width: 1440px;
+            height: auto;
+            background-color: white;
+
+        }
+
+        .footer-block {
+            width: 1440px;
+            height: 180px;
+
+            background-color: #E9706E;
+        }
+
+
+        /* ▼ header物件排版  
+
+        .statusbar1{
+            margin-left: 16px;
+        }
+        .statusbar2{
+            margin-left: 145px;
+        }
+        .statusbar3{
+            margin-right:13px ;
+        }
+        .statusbar-justified{
+            width: 3629x;
+            height:13px ;
+            margin-top: 5px;
+        }*/
+
+        .logo {
+            margin-left: 47px;
+            margin-right: 650px;
+            margin-bottom: 20px;
+            margin-top: 14px;
+            width: 160px;
+            height: auto;
+        }
+
+        .header-button {
+            margin-right: 46px;
+        }
+
+
+        /* 桌機-精選文章*/
+
+        /* ⬇️ 為 Bootstrap Carousel 我們想要的樣式 ⬇️ */
+
+        /* Daily featured文章大標 */
+
+        /* 短-文章大標排版 */
+        .featured-main-title-1 {
+            width: calc(1320/1440*100%);
+            height: 83px;
+            font-weight: bold;
+            font-size: 46px;
+            line-height: 83px;
+            text-align: left;
+            color: white;
+            margin-left: 80px;
+            position: absolute;
+            bottom: 150px;
+        }
+
+        /* 長-文章大標排版 */
+        .featured-main-title-2 {
+            width: calc(1320/1440*100%);
+            height: 83px;
+            font-weight: bold;
+            font-size: 46px;
+            line-height: 83px;
+            text-align: left;
+            color: white;
+            margin-left: 80px;
+            position: absolute;
+            bottom: 150px;
+        }
+
+        /* 固定照片高度，且讓照片撐滿版面 */
+        .carousel img {
+            height: 916px;
+            width: 100%;
+            object-fit: cover;
+            /*margin-top:-80px ;*/
+            position: relative;
+        }
+
+        /* 調整示意圓點的位置 */
+        .carousel-indicators {
+            margin-bottom: 0px;
+            position: absolute;
+            bottom: 50px;
+        }
+
+        /* 調整示意圓點的樣子 */
+        .carousel-indicators [data-bs-target] {
+            border-radius: 50%;
+            background-color: white;
+            border: 1px;
+            width: 10px;
+            height: 10px;
+            margin-left: 10px;
+        }
+
+        .carousel-indicators .active[data-bs-target] {
+            background-color: #E9706E;
+        }
+
+        /* ⬆️ 為 Bootstrap Carousel 我們想要的樣式 ⬆️ */
+
+
+        /* ⬇️ 為 Bootstrap Collapse 我們想要的樣式 ⬇️ */
+        .annotation[data-bs-toggle="collapse"][aria-expanded="false"] img {
+            transform: rotate(-90deg);
+            transition: transform;
+            transition-duration: 0.3s;
+            transition-timing-function: ease-in-out;
+        }
+
+        .annotation[data-bs-toggle="collapse"][aria-expanded="true"] img {
+            transform: rotate(0deg);
+            transition: transform;
+            transition-duration: 0.3s;
+            transition-timing-function: ease-in-out;
+        }
+
+        .collapsing.annotation,
+        .collapse.annotation {
+            background-color: #fff;
+            padding-top: 15px;
+            padding-bottom: 20px;
+        }
+
+        .collapsing.annotation p,
+        .collapse.annotation p {
+            width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 20px;
+            line-height: 40px;
+        }
+
+        /* ⬆️ 為 Bootstrap Collapse 我們想要的樣式 ⬆️ */
+
+
+
+        /* 電影和影集的推薦文章*/
+        /* 👻👻 卡片文章排版問題*/
+
+
+        .recommended-tag-svg1 {
+            margin-left: 635px;
+            margin-top: 60px;
+            margin-bottom: 60px;
+
+        }
+
+        .recommended-tag-svg2 {
+            margin-left: 675px;
+            margin-top: 60px;
+            margin-bottom: 60px;
+
+        }
+
+        .recommended-tag-to-tag {
+            margin-bottom: 180px;
+        }
+
+        .recommended-article-block {
+            width: 1170px;
+            height: 425px;
+            margin-left: 160px;
+            margin-right: 160px;
+            margin-top: 60px;
+            margin-bottom: 60px;
+        }
+
+        .recommended-article-card {
+            width: 340px;
+            height: 425px;
+            border-radius: 30px;
+            background-color: #FEFFF9;
+            /* flex-direction: row;*/
+            margin-right: 50px;
+            margin-left: 50px;
+        }
+
+
+
+        /* 你的聲影 */
+
+        .your-voice-tag-svg {
+            margin-left: 589px;
+            margin-top: 60px;
+            margin-bottom: 60px;
+        }
+
+        .your-voice-description {
+            text-align: center;
+            font-size: 24px;
+            line-height: 39px;
+            font-weight: 700;
+            color: #7B7878;
+        }
+
+        .your-voice-card {
+            justify-content: center;
+            margin-left: 48px;
+
+        }
+
+        .your-voice-card-block {
+            width: 1032px;
+            height: 280px;
+            margin-left: 204px;
+            margin-right: 204px;
+            margin-top: 60px;
+            margin-bottom: 60px;
+        }
+
+        .your-voice-pick-button {
+            margin-left: 635px;
+            margin-bottom: 50px;
+        }
+
+        /* footer */
+
+        /* .footer-button {
+            justify-content: center;
+            font-size: 22px;
+            color: #FEFFF9;
+            font-weight: 700;
+        }
+
+        .footer-button-head {
+            height: 47px;
+            margin-top: 43px;
+            margin-left: 413px;
+            margin-right: 42px;
+        }
+
+        .footer-button-middle {
+            height: 47px;
+            margin-top: 43px;
+            margin-right: 42px;
+        }
+
+        .footer-button-tail {
+            height: 47px;
+            margin-top: 43px;
+            margin-right: 371px;
+        }*/
+
+        .footer-svg {
+            margin-left: 606.5px;
+            margin-top: 50px;
+        }
+
+        .footer-button-bar {
+            width: 656px;
+            margin-left: 413px;
+            margin-right: 413px;
+            padding-top: 50px;
+        }
+
+        .footer-button-svg {
+            margin-left: 42px;
+
+        }
+
+        .desktop-version {
+            width: 1440px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body onload="onload()">
+
+
+    <!-- desktop version start -->
+    <div class="desktop-version">
+        <!-- loader 元素 -->
+        <div id="loader">
+            <img src="./asset/load-6s-animation.gif">
+        </div>
+
+        <!-- 👻 header按鈕和固定待補 -->
+        <!-- ▼聲影少女 header -->
+
+        <div class="header-block">
+            <div class="header">
+                <!--  <div class="statusbar-justified">
+                    <img src="./asset/icon-statusbar-m.svg" class="statusbar1">
+                    <img src="./asset/icon-statusbar-m.svg" class="statusbar2">
+                    <img src="./asset/icon-statusbar-m.svg" class="statusbar3">
+                </div>-->
+
+                <img src="./asset/Icon-logo.svg" class="logo">
+                <img src="./asset/icon-header-button-1.svg" class="header-button">
+                <img src="./asset/icon-header-button-2.svg" class="header-button">
+                <img src="./asset/icon-header-button-3.svg" class="header-button">
+                <img src="./asset/icon-header-button-4.svg" class="header-button">
+                <img src="./asset/icon-header-button-5.svg" class="">
+
+            </div>
+        </div>
+
+        <!-- ▲聲影少女 header -->
+
+
+
+
+        <!-- ▼本日精選 Daily Featured__carousel-->
+
+        <div class="featured-block">
+
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+
+                <!--底部標示所在文章的圓點按鈕-->
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                        class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                        aria-label="Slide 4"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
+                        aria-label="Slide 5"></button>
+                </div>
+
+                <!-- Carousel照片-->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="./asset/img-1.jpg" class="d-block w-100" alt="image 1">
+                        <div class="featured-main-title-1">從雲端情人看愛「人」的勇氣</div>
+                    </div>
+                    <div class="carousel-item" data-bs-interval="false">
+                        <img src="./asset/img-2.jpg" class="d-block w-100" alt="image 2">
+                        <div class="featured-main-title-2">當失去和擁有同樣困難：《世界上最爛的人》裡的現代女性困境</div>
+                    </div>
+                    <div class="carousel-item" data-bs-interval="false">
+                        <img src="./asset/img-3-m.jpg" class="d-block w-100" alt="image 3">
+                        <div class="featured-main-title-2">沒玩過遊戲也能共感！《英雄聯盟：奧術》帶你窺探英雄內心世界</div>
+                    </div>
+                    <div class="carousel-item" data-bs-interval="false">
+                        <img src="./asset/img-4-m.jpg" class="d-block w-100" alt="image 4">
+                        <div class="featured-main-title-2">奈沙馬蘭超級英雄電影十年馬拉松最終章——Glass異裂</div>
+                    </div>
+                    <div class="carousel-item" data-bs-interval="false">
+                        <img src="./asset/img-5.jpeg" class="d-block w-100" alt="image 5">
+                        <div class="featured-main-title-1">《玩具總動員 4》玩具是誰?</div>
+                    </div>
+                </div>
+
+                <!--上下張按鈕-->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+
+            </div>
+
+            <!-- ▲ 本日精選 Daily Featured__carousel-->
+
+        </div>
+
+        <!-- ▼最新推薦文章區 Latest Recommended article -->
+        <!-- 👻卡片文章還沒放進去 -->
+
+        <div class="recommended-block">
+
+            <!-- ↓ 電影文章 -->
+            <div>
+                <img src="./asset/icon-film.svg" class="recommended-tag-svg2" alt="電影">
+
+                <div class="recommended-article-block">
+
+                    <div class="recommended-article-card"></div>
+                    <div class="recommended-article-card"></div>
+                    <div class="recommended-article-card"></div>
+
+                </div>
+
+                <img src="./asset/icon-check-all.svg" class="recommended-tag-svg1 recommended-tag-to-tag" alt="看更多">
+            </div>
+
+            <!-- ↓ 影集文章 -->
+            <div>
+                <img src="./asset/icon-series.svg" class="recommended-tag-svg2" alt="影集">
+
+                <div class="recommended-article-block">
+
+                    <div class="recommended-article-card"></div>
+                    <div class="recommended-article-card"></div>
+                    <div class="recommended-article-card"></div>
+
+                </div>
+
+                <img src="./asset/icon-check-all.svg" class="recommended-tag-svg1" alt="看更多">
+            </div>
+
+            <!-- ▲ 最新推薦文章區 Latest Recommended article  -->
+
+
+        </div>
+        <!-- ▼ 你的聲影-->
+        <!-- 👻 只有先排版，翻卡特效還沒做 -->
+        <div class="your-voice-block">
+            <div>
+
+                <img src="./asset/icon-your-voice.svg" class="your-voice-tag-svg" alt="你的聲影">
+                <div class=" your-voice-description"> 又遇到選擇障礙不知道要看什麼影劇了嗎?點擊卡片抽一張適合今天的你的聲影</div>
+                <div class="your-voice-card-block">
+                    <img src="./asset/Icon-your-voice-card.svg" class="your-voice-card" alt="沒得看qq">
+                    <img src="./asset/Icon-your-voice-card.svg" class="your-voice-card" alt="沒得看qq">
+                    <img src="./asset/Icon-your-voice-card.svg" class="your-voice-card" alt="沒得看qq">
+                    <img src="./asset/Icon-your-voice-card.svg" class="your-voice-card" alt="沒得看qq">
+                </div>
+                <img src="./asset/icon-pick-for-you.svg" class="your-voice-pick-button button" alt="少女幫你選">
+
+            </div>
+
+
+        </div>
+        <!-- ▲ 你的聲影 -->
+
+        <div class="footer-block">
+
+            <div class="footer-button-bar">
+                <img src="./asset/icon-footer-button-1.svg" class="footer-button-svg" alt="首頁">
+                <img src="./asset/icon-footer-button-2.svg" class="footer-button-svg" alt="電影">
+                <img src="./asset/icon-footer-button-3.svg" class="footer-button-svg" alt="影集">
+                <img src="./asset/icon-footer-button-4.svg" class="footer-button-svg" alt="錄音">
+                <img src="./asset/icon-footer-button-5.svg" class="footer-button-svg" alt="你的聲影">
+                <img src="./asset/icon-footer-button-6.svg" class="footer-button-svg" alt="歡愉少女">
+            </div>
+
+            <img src="./asset/icon-footer.svg" class="footer-svg" alt="聲影少女版權">
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        </script>
+
+    <!-- 載入 jQuery 套件 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+
+    <script>
+        function onLoad() {
+            // 等一秒鐘後，在 `<div id="loader">` 的元素上，加上 `class="loaded"`。
+            // `<div id="loader">` -> `<div id="loader" class="loaded">`
+            setTimeout(() => {
+                $('#loader').addClass("loaded");
+            }, 6000)
+        }
+    </script>
+</body>
+
+</html>
